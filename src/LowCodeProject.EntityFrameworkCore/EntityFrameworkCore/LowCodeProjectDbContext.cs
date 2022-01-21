@@ -1,4 +1,5 @@
 ﻿using LowCodeProject.Model;
+using LowCodeProject.Model.WorkFlow;
 using Microsoft.EntityFrameworkCore;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.BackgroundJobs.EntityFrameworkCore;
@@ -74,6 +75,16 @@ namespace LowCodeProject.EntityFrameworkCore
         public DbSet<WarehouseModel> WarehouseModel { get; set; }
 
 
+        /// <summary>
+        /// 工作流表
+        /// </summary>
+        public DbSet<FlowInstance> FlowInstance { get; set; }
+        public DbSet<FlowRecord> FlowRecord { get; set; }
+        public DbSet<Node> Node { get; set; }
+        public DbSet<Request> Request { get; set; }
+
+
+
         #endregion
 
         public LowCodeProjectDbContext(DbContextOptions<LowCodeProjectDbContext> options)
@@ -115,7 +126,13 @@ namespace LowCodeProject.EntityFrameworkCore
             builder.Entity<UploadPicture>(x => x.ToTable("tb_UploadPicture"));
             builder.Entity<WarehouseModel>(x => x.ToTable("tb_WarehouseModel"));
             builder.Entity<FormatModel>(x => x.ToTable("tb_FormatModel"));
-            
+
+            //工作流
+            builder.Entity<FormatModel>(x => x.ToTable("tb_FlowInstance"));
+            builder.Entity<FormatModel>(x => x.ToTable("tb_FlowRecord"));
+            builder.Entity<FormatModel>(x => x.ToTable("tb_Node"));
+            builder.Entity<FormatModel>(x => x.ToTable("tb_Request"));
+
             //builder.Entity<YourEntity>(b =>
             //{
             //    b.ToTable(LowCodeProjectConsts.DbTablePrefix + "YourEntities", LowCodeProjectConsts.DbSchema);
